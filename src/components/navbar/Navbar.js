@@ -5,7 +5,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import {ViewGridIcon} from "@heroicons/react/solid";
 
 const navigation = [
-  { name: 'Arbit Blog', href: '#', current: true },
+  { name: 'Arbit Blog', href: '/', current: true },
 ]
 
 function classNames(...classes) {
@@ -50,8 +50,8 @@ export default function Example() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'text-black font-bold text-lg' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current ? 'text-black text-lg font-bold text-lg' : 'text-gray-300 text-lg hover:bg-gray-700 hover:text-white',
+                          'px-3 py-2 rounded-md text-lg font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
