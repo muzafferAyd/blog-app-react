@@ -12,7 +12,7 @@ export const MainRouter = () => {
         <div>
             <Navbar />
             <Routes>
-                <Route path="/detail" element={<CardDetail/>} exact />
+                <Route path="/detail/:slug" element={<CardDetail/>} exact />
                 <Route path="/" element={<HomePage/>} exact />
             </Routes>
         </div>
