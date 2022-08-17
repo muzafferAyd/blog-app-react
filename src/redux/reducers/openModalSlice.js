@@ -1,0 +1,22 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const openModalSlice = createSlice({
+  name: "modal",
+  initialState: {
+    value: false,
+  },
+  reducers: {
+    setShowModal: (state) => {
+      state.value = true;
+      console.log("vv", state.value)
+    },
+    setHideModal: (state) => {
+      state.value = false;
+      console.log("vv", state.value)
+    },
+  },
+});
+
+export const { setHideModal, setShowModal } = openModalSlice.actions;
+
+export default openModalSlice.reducer;

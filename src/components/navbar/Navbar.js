@@ -1,18 +1,24 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import {ViewGridIcon} from "@heroicons/react/solid";
+import {Fragment, useEffect} from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { ViewGridIcon } from "@heroicons/react/solid";
+import {useDispatch, useSelector} from "react-redux";
+import {getPostList} from "../../redux/reducers/getPostList";
 
-const navigation = [
-  { name: 'Arbit Blog', href: '/', current: true },
-]
+const navigation = [{ name: "Arbit Blog", href: "/", current: true }];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPostList());
+  }, [dispatch]);
+
+  const { posts, loading } = useSelector((state) => state.postList);
   return (
     <Disclosure as="nav" className="bg-white">
       {({ open }) => (
@@ -50,10 +56,12 @@ export default function Example() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'text-black text-lg font-bold text-lg' : 'text-gray-300 text-lg hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-lg font-medium'
+                          item.current
+                            ? "text-black text-lg font-bold text-lg"
+                            : "text-gray-300 text-lg hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-lg font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
@@ -62,25 +70,23 @@ export default function Example() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                    type="button"
-                    className="p-4 font-bold text-gray-600"
-                >
-                  <span>Posts</span>
+                <button type="button" className="p-4 font-bold text-gray-600">
+                  <span className="mr-1">Posts</span>
+                  <span className="relative bottom-2.5 bg-green-100 text-green-800 text-xs font-semibold mr-1 px-1 py-0.5 rounded-2xl dark:bg-green-200 dark:text-green-900">
+                    {posts.length}
+                  </span>
                 </button>
 
-                <button
-                    type="button"
-                    className="p-4 text-gray-600"
-                >
+                <button type="button" className="p-4 text-gray-600">
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" fill="currentColor" aria-hidden="true" />
+                  <BellIcon
+                    className="h-6 w-6"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  />
                 </button>
 
-                <button
-                  type="button"
-                  className="p-4 text-gray-600"
-                  >
+                <button type="button" className="p-4 text-gray-600">
                   <span className="sr-only">Application</span>
                   <ViewGridIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
@@ -111,7 +117,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Your Profile
                           </a>
@@ -121,7 +130,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Settings
                           </a>
@@ -131,7 +143,10 @@ export default function Example() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Sign out
                           </a>
@@ -152,10 +167,12 @@ export default function Example() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -165,5 +182,5 @@ export default function Example() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }

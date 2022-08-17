@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function MediaCard({ post }) {
   const navigate = useNavigate();
   const openDetails = () => {
-    navigate(`/detail/${post.id}`,{state:{post}});
+    navigate(`/detail/${post.id}`, { state: { post } });
   };
   return (
     <div>

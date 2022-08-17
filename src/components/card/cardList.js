@@ -1,30 +1,16 @@
 import React from "react";
 import MediaCard from "./mediaCard";
-import { useDispatch } from "react-redux";
-import { decrement, increment } from "../../redux/reducers/getPostList";
+import {useDispatch, useSelector} from "react-redux";
 
 function CardList() {
-  const dispatch = useDispatch();
+    const { posts, loading } = useSelector((state) => state.postList);
   return (
-    <div className="mt-10 mb-5 grid grid-cols-3 gap-4">
-      "No data avaible"
-      <button
-        onClick={() => {
-          dispatch(decrement());
-        }}
-        className="bg-red-500"
-      >
-        -1
-      </button>
-      <button
-        onClick={() => {
-          dispatch(increment());
-        }}
-        className="bg-blue-500"
-      >
-        +1
-      </button>
-    </div>
+
+      <div className="mt-10 mb-5 grid grid-cols-3 gap-4">
+          {posts
+              ? posts.map((item, id) => <MediaCard key={id} post={item} />)
+              : "No data avaible"}
+      </div>
   );
 }
 
