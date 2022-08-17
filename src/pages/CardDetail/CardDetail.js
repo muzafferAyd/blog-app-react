@@ -1,21 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import { ArrowCircleLeftIcon } from "@heroicons/react/solid";
 import { useLocation, useNavigate  } from "react-router-dom";
+import AddPostFrom from "../../components/card/AddPostFrom"
+
+
 
 export const CardDetail = () => {
+  const [open, setOpen] = useState(false)
+  const handleClose = () => {
+    setOpen(false)
+  }
+  const handleOpen = () =>{
+    setOpen(true)
+  }
   const location = useLocation();
   const navigate = useNavigate();
-  console.log("loca", location);
   return (
     <div className="bg-white align-baseline flex mt-5 h-screen">
       <ArrowCircleLeftIcon
-        onClick={() => navigate(-1)}
-        className="w-10 mt-10 ml-10 h-10"
-      ></ArrowCircleLeftIcon>
+    onClick={() => navigate(-1)}
+    className="w-10 mt-10 ml-10 h-10"
+    />
       <div className="ml-2 w-1/2">
         <div className="flex items-baseline max-w-m pt-10  justify-between">
           <h3 className="text-2xl font-bold">Posts</h3>
-          <button className="bg-blue-600 hover:bg-blue-700 rounded-xl text-white font-bold py-2 px-4 rounded">
+          <button onClick={handleOpen} className="bg-blue-600 hover:bg-blue-700 rounded-xl text-white font-bold py-2 px-4 rounded">
             + New Post
           </button>
         </div>
@@ -74,6 +83,7 @@ export const CardDetail = () => {
           </button>
         </div>
       </div>
+
     </div>
   );
 };
