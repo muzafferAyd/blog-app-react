@@ -8,11 +8,9 @@ const openModalSlice = createSlice({
   reducers: {
     setShowModal: (state) => {
       state.value = true;
-      console.log("vv", state.value)
     },
     setHideModal: (state) => {
       state.value = false;
-      console.log("vv", state.value)
     },
   },
 });
